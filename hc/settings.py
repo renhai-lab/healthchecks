@@ -14,6 +14,7 @@ from typing import Any
 from urllib.parse import urlparse
 
 import django_stubs_ext
+import dj_database_url
 
 django_stubs_ext.monkeypatch()
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -161,22 +162,13 @@ DATABASES: Mapping[str, Any] = {
 # variable 'DB'. Travis CI does this.
 if os.getenv("DB") == "postgres":
     DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "HOST": os.getenv("DB_HOST", ""),
-            "PORT": os.getenv("DB_PORT", ""),
-            "NAME": os.getenv("DB_NAME", "hc"),
-            "USER": os.getenv("DB_USER", "postgres"),
-            "PASSWORD": os.getenv("DB_PASSWORD", ""),
-            "CONN_MAX_AGE": envint("DB_CONN_MAX_AGE", "0"),
-            "TEST": {"CHARSET": "UTF8"},
-            "OPTIONS": {
-                "sslmode": os.getenv("DB_SSLMODE", "prefer"),
-                "target_session_attrs": os.getenv(
-                    "DB_TARGET_SESSION_ATTRS", "read-write"
-                ),
-            },
-        }
+    'default': dj_database_url.config(
+        dj_database_url.config(
+            env="DATABASE_URL",
+            engine="django.contrib.gis.db.backends.postgresql",
+            conn_max_age=600
+            ),
+        )
     }
 
 if os.getenv("DB") == "mysql":
