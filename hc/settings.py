@@ -40,7 +40,6 @@ SECRET_KEY = os.getenv("SECRET_KEY", "---")
 METRICS_KEY = os.getenv("METRICS_KEY")
 DEBUG = envbool("DEBUG", "True")
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
-ALLOWED_HOSTS.append('hc-django.onrender.com')
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "healthchecks@example.org")
 SUPPORT_EMAIL = os.getenv("SUPPORT_EMAIL")
 USE_PAYMENTS = envbool("USE_PAYMENTS", "False")
@@ -162,15 +161,14 @@ DATABASES: Mapping[str, Any] = {
 # You can switch database engine to postgres or mysql using environment
 # variable 'DB'. Travis CI does this.
 if os.getenv("DB") == "postgres":
+    # Replace the SQLite DATABASES configuration with PostgreSQL:
     DATABASES = {
     'default': dj_database_url.config(
-        dj_database_url.config(
-            env="DATABASE_URL",
-            engine="django.contrib.gis.db.backends.postgresql",
-            conn_max_age=600
-            ),
-        )
-    }
+        # Replace this value with your local database's connection string.
+        default=os.getenv("DATABASE_URL"),
+        conn_max_age=600
+    )
+}
 
 if os.getenv("DB") == "mysql":
     DATABASES = {
