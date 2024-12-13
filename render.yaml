@@ -10,7 +10,7 @@ services:
     name: hc-django
     runtime: python
     buildCommand: "./build.sh"
-    startCommand: "python -m gunicorn hc.asgi:application -k uvicorn.workers.UvicornWorker"
+    startCommand: "python -m gunicorn hc.wsgi:application -k uvicorn.workers.UvicornWorker"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -27,7 +27,7 @@ services:
       - key: ADMINS
         value: "hncdjzw@qq.com"
       - key: ALLOWED_HOSTS
-        value: "172.17.0.1,hc.renhai.online"
+        value: "hc.renhai.online,hc-django.onrender.com"
       - key: DEBUG
         sync: false
       - key: DEFAULT_FROM_EMAIL
