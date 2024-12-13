@@ -1,5 +1,5 @@
 databases:
-  - name: hc
+  - name: hc-db
     plan: free
     databaseName: healthcheckdb
     user: hc
@@ -7,7 +7,7 @@ databases:
 services:
   - type: web
     plan: free
-    name: hc
+    name: hc-django
     runtime: python
     buildCommand: "./build.sh"
     startCommand: "python -m gunicorn hc.asgi:application -k uvicorn.workers.UvicornWorker"
@@ -48,5 +48,3 @@ services:
         value: "True"
       - key: REGISTRATION_OPEN
         value: "False"
-      - key: SECRET_KEY
-        sync: false
