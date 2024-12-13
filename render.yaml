@@ -16,7 +16,7 @@ services:
         value: "postgres"
       - key: DATABASE_URL
         fromDatabase:
-          name: hc
+          name: hc-db
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
