@@ -43,13 +43,13 @@ services:
       - key: DEBUG
         sync: false
       - key: DEFAULT_FROM_EMAIL
-        value: "mail@renhai.online"
+        sync: false
       - key: EMAIL_HOST
-        value: "smtp.mailgun.org"
+        sync: false
       - key: EMAIL_HOST_PASSWORD
         sync: false
       - key: EMAIL_HOST_USER
-        value: "healthcheck@mail.renhai.online"
+        sync: false
       - key: EMAIL_PORT
         value: "465"
       - key: EMAIL_USE_TLS
