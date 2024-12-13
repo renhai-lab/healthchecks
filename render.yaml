@@ -33,13 +33,13 @@ services:
       - key: WEB_CONCURRENCY
         value: 4
       - key: SITE_NAME
-        value: "Healthchecks"
+        sync: false
       - key: SITE_ROOT
-        value: "https://hc.renhai.online"
+        sync: false
       - key: ADMINS
-        value: "hncdjzw@qq.com"
+        sync: false
       - key: ALLOWED_HOSTS
-        value: "hc.renhai.online,hc-django.onrender.com"
+        sync: false
       - key: DEBUG
         sync: false
       - key: DEFAULT_FROM_EMAIL
@@ -51,12 +51,12 @@ services:
       - key: EMAIL_HOST_USER
         sync: false
       - key: EMAIL_PORT
-        value: "465"
+        sync: false
       - key: EMAIL_USE_TLS
-        value: "False"
+        sync: false
       - key: EMAIL_USE_SSL
-        value: "True"
+        sync: false
       - key: EMAIL_USE_VERIFICATION
-        value: "True"
+        sync: false
       - key: REGISTRATION_OPEN
-        value: "False"
+        sync: false
